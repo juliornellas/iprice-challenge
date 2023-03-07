@@ -16,6 +16,10 @@ export default {
       type: Array,
       required: true,
     },
+    empties: {
+      type: Array,
+      required: false,
+    },
   },
   setup() {
     return {
@@ -147,6 +151,39 @@ export default {
         >
           longitude
         </td>
+      </tr>
+
+      <tr
+        class="hover:bg-gray-100"
+        v-for="(empty, index) in empties"
+        :key="index"
+      >
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="text-left border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        >
+          {{ empty.Company }}
+        </td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
+        <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        ></td>
       </tr>
       <!-- <tr v-if="item.quote > 0">
         Date / Company / FIX / FRN / FIX / FRN / FIX / FRN

@@ -4,12 +4,14 @@ import data from "@/data/data.json";
 export default createStore({
   state: {
     items: [],
+    empties: [],
   },
   getters: {},
   mutations: {
-    handleData(state, { Items: items }) {
+    handleData(state, { Items: i }) {
       let data = [];
-      items.forEach(({ Company, DateSent, Id, Preferred, Quote }) => {
+      let empties = [];
+      i.forEach(({ Company, DateSent, Id, Preferred, Quote }) => {
         if (Quote) {
           Quote.forEach((item) => {
             data.push({
@@ -28,7 +30,7 @@ export default createStore({
             });
           });
         } else {
-          data.push({
+          empties.push({
             Company,
             DateSent,
             Id,
@@ -37,8 +39,9 @@ export default createStore({
           });
         }
       });
-      console.log("DATA", data);
       state.items = [...data];
+      state.empties = [...empties];
+      console.log("DATA", state);
     },
   },
   actions: {
