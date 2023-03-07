@@ -8,10 +8,11 @@ export default createStore({
   getters: {},
   mutations: {
     handleData(state, { Items: items }) {
-      const i = items.map(({ Company, DateSent, Id, Preferred, Quote }) => {
+      let data = [];
+      items.forEach(({ Company, DateSent, Id, Preferred, Quote }) => {
         if (Quote) {
-          return Quote.map((item) => {
-            return {
+          Quote.forEach((item) => {
+            data.push({
               Company,
               DateSent,
               Id,
@@ -24,20 +25,20 @@ export default createStore({
               Spread: item.Spread,
               Years: item.Years,
               Yield: item.Yield,
-            };
+            });
           });
         } else {
-          return {
+          data.push({
             Company,
             DateSent,
             Id,
             Preferred,
-            Quote,
-          };
+            Quote: false,
+          });
         }
       });
-      console.log("Before handle", items);
-      console.log("Inside handle data", i);
+      console.log("DATA", data);
+      state.items = [...data];
     },
   },
   actions: {
