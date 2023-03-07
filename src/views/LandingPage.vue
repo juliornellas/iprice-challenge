@@ -2,7 +2,7 @@
 // @ is an alias to /src
 import { useStore } from "vuex";
 import MainTable from "@/components/UI/MainTable.vue";
-import data from "@/data/data.json";
+// import data from "@/data/data.json";
 export default {
   name: "LandingPage",
   components: {
@@ -10,11 +10,12 @@ export default {
   },
   setup() {
     const store = useStore();
+    store.dispatch("readData");
     //Usar essa pagina como principal e inserir dados no VUEX aqui e buscar direto na tabela dos items
     return {
       title: "iPrice Challenge",
       items: store.state.items,
-      fromJson: data.Items,
+      // fromJson: data.Items,
     };
   },
 };
@@ -76,7 +77,7 @@ export default {
     </div>
 
     <div>
-      <MainTable :items="fromJson"></MainTable>
+      <MainTable :items="items"></MainTable>
     </div>
   </div>
 </template>

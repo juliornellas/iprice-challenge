@@ -1,10 +1,27 @@
 <script>
+import {
+  ChevronRightIcon,
+  ChevronDoubleDownIcon,
+  ChevronDoubleUpIcon,
+} from "@heroicons/vue/24/solid";
 export default {
+  components: {
+    ChevronRightIcon,
+    ChevronDoubleDownIcon,
+    ChevronDoubleUpIcon,
+    // ChevronDownIcon,
+  },
   props: {
     items: {
       type: Array,
       required: true,
     },
+  },
+  setup() {
+    return {
+      expand: () => console.log("EXPANDED!"),
+      sort: () => console.log("SORT!"),
+    };
   },
 };
 </script>
@@ -14,56 +31,68 @@ export default {
       <tr>
         <th></th>
         <th></th>
-        <th colspan="2" class="border-b border-gray-800">5 YRS</th>
-        <th colspan="2" class="border-b border-gray-800">10 YRS</th>
-        <th colspan="2" class="border-b border-gray-800">40 YRS</th>
+        <th colspan="2" class="text-xs border-b border-gray-800">5 YRS</th>
+        <th colspan="2" class="text-xs border-b border-gray-800">10 YRS</th>
+        <th colspan="2" class="text-xs border-b border-gray-800">40 YRS</th>
       </tr>
       <tr class="text-gray-400">
         <th
           scope="col"
-          class="w-2/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-2/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
-          DATA SENT
+          <div class="flex items-center">
+            DATA SENT
+            <ChevronDoubleDownIcon
+              @click="sort()"
+              class="h-3 w-3 ml-2 text-gray-800"
+            />
+          </div>
         </th>
         <th
           scope="col"
-          class="w-5/12 text-left border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-5/12 px-2 text-xs text-left border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
-          COMPANY
+          <div class="flex items-center">
+            COMPANY
+            <ChevronDoubleUpIcon
+              @click="sort()"
+              class="h-3 w-3 ml-2 text-gray-800"
+            />
+          </div>
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
           scope="col"
-          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
+          class="w-1/12 px-2 text-xs border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
@@ -74,7 +103,14 @@ export default {
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          {{ item.DateSent }}
+          <div class="flex items-center">
+            <ChevronRightIcon
+              @click="expand()"
+              v-if="item.DateSent"
+              class="h-3 w-3 mr-2"
+            />
+            {{ item.DateSent }}
+          </div>
         </td>
         <td
           class="text-left border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
@@ -82,7 +118,7 @@ export default {
           {{ item.Company }}
         </td>
         <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+          class="bg-yellow-100 border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
           latitude
         </td>
@@ -112,6 +148,9 @@ export default {
           longitude
         </td>
       </tr>
+      <!-- <tr v-if="item.quote > 0">
+        Date / Company / FIX / FRN / FIX / FRN / FIX / FRN
+      </tr> -->
       <tr class="border-b border-gray-800"></tr>
     </tbody>
     <tfoot>
