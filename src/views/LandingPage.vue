@@ -26,25 +26,41 @@ export default {
       <p class="text-2xl font-bold mb-3">{{ title }}</p>
       <div class="my-2 flex justify-start">
         <div>
-          <span class="p-2 border rounded-l-md text-blue-700 text-xs">USD</span>
-          <span class="p-2 border text-blue-700 text-xs">EUR</span>
-          <span class="p-2 border rounded-r-md text-blue-700 text-xs">CAD</span>
+          <span
+            class="p-2 border border-sky-800 rounded-l-md text-sky-800 text-xs"
+            >USD</span
+          >
+          <span class="p-2 border border-sky-800 text-sky-800 text-xs"
+            >EUR</span
+          >
+          <span
+            class="p-2 border border-sky-800 rounded-r-md text-sky-800 text-xs"
+            >CAD</span
+          >
         </div>
         <div class="mx-4">
-          <span class="p-2 border rounded-l-md text-blue-700 text-xs"
+          <span
+            class="p-2 border border-sky-800 rounded-l-md text-sky-800 text-xs"
             >5 YRS</span
           >
-          <span class="p-2 border text-blue-700 text-xs">10 YRS</span>
-          <span class="p-2 border rounded-r-md text-blue-700 text-xs"
+          <span class="p-2 border border-sky-800 text-sky-800 text-xs"
+            >10 YRS</span
+          >
+          <span
+            class="p-2 border border-sky-800 rounded-r-md text-sky-800 text-xs"
             >40 YRS</span
           >
         </div>
         <div>
-          <span class="p-2 border rounded-l-md text-blue-700 text-xs"
+          <span
+            class="p-2 border border-sky-800 rounded-l-md text-sky-800 text-xs"
             >Spread</span
           >
-          <span class="p-2 border text-blue-700 text-xs">Yield</span>
-          <span class="p-2 border rounded-r-md text-blue-700 text-xs"
+          <span class="p-2 border border-sky-800 text-sky-800 text-xs"
+            >Yield</span
+          >
+          <span
+            class="p-2 border border-sky-800 rounded-r-md text-sky-800 text-xs"
             >3MLSpread</span
           >
         </div>
@@ -54,7 +70,7 @@ export default {
     <div class="flex justify-start my-4">
       <input
         type="text"
-        class="border px-2 text-sm rounded"
+        class="w-60 border p-2 text-sm rounded"
         placeholder="Filter by compan name"
       />
     </div>

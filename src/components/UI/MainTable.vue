@@ -12,43 +12,58 @@ export default {
   <table class="w-full bg-white dark:bg-slate-800 text-sm shadow-sm">
     <thead>
       <tr>
+        <th></th>
+        <th></th>
+        <th colspan="2" class="border-b border-gray-800">5 YRS</th>
+        <th colspan="2" class="border-b border-gray-800">10 YRS</th>
+        <th colspan="2" class="border-b border-gray-800">40 YRS</th>
+      </tr>
+      <tr class="text-gray-400">
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-2/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           DATA SENT
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-5/12 text-left border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           COMPANY
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FIX
         </th>
         <th
-          class="border-b border-gray-900 dark:text-slate-200 dark:border-gray-600 p-2"
+          scope="col"
+          class="w-1/12 border-b border-gray-900 dark:text-slate-200 dark:border-gray-600"
         >
           FRN
         </th>
@@ -62,7 +77,7 @@ export default {
           {{ item.DateSent }}
         </td>
         <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+          class="text-left border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
           {{ item.Company }}
         </td>
@@ -97,6 +112,19 @@ export default {
           longitude
         </td>
       </tr>
+      <tr class="border-b border-gray-800"></tr>
     </tbody>
+    <tfoot>
+      <tr class="border border-gray-800">
+        <td class="py-4"></td>
+        <td class="text-left">Average by Spread</td>
+        <td>21,000</td>
+        <td>21,000</td>
+        <td>21,000</td>
+        <td>21,000</td>
+        <td>21,000</td>
+        <td>21,000</td>
+      </tr>
+    </tfoot>
   </table>
 </template>
