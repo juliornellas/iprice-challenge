@@ -58,13 +58,12 @@ export default {
           item.Company.toLowerCase().match(search.value.toLowerCase())
         )
         .filter((item) => item.Currency === filteredCurrency.value)
-        .filter((item) => {
-          return (
+        .filter(
+          (item) =>
             (filteredYears5.value && item.Years === 5) ||
             (filteredYears10.value && item.Years === 10) ||
             (filteredYears40.value && item.Years === 40)
-          );
-        })
+        )
         .filter((item) => {
           return item;
         });

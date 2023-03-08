@@ -114,7 +114,7 @@ export default {
               v-if="item.DateSent"
               class="h-3 w-3 mr-2"
             />
-            {{ item.DateSent }}
+            {{ $filters.formatDate(item.DateSent) }}
           </div>
         </td>
         <td
