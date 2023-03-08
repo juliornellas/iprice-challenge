@@ -4,6 +4,7 @@ import {
   ChevronDoubleDownIcon,
   ChevronDoubleUpIcon,
 } from "@heroicons/vue/24/solid";
+
 export default {
   components: {
     ChevronRightIcon,
@@ -16,10 +17,10 @@ export default {
       type: Array,
       required: true,
     },
-    empties: {
-      type: Array,
-      required: false,
-    },
+    // empties: {
+    //   type: Array,
+    //   required: false,
+    // },
   },
   setup() {
     return {
@@ -124,36 +125,36 @@ export default {
         <td
           class="bg-yellow-100 border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          latitude
+          {{ item.Years === 5 && item.CouponType === "FIX" && item.Spread }}
         </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          longitude
+          {{ item.Years === 5 && item.CouponType === "FRN" && item.Spread }}
         </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          longitude
+          {{ item.Years === 10 && item.CouponType === "FIX" && item.Spread }}
         </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          longitude
+          {{ item.Years === 10 && item.CouponType === "FRN" && item.Spread }}
         </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          longitude
+          {{ item.Years === 40 && item.CouponType === "FIX" && item.Spread }}
         </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         >
-          longitude
+          {{ item.Years === 40 && item.CouponType === "FRN" && item.Spread }}
         </td>
       </tr>
 
-      <tr
+      <!-- <tr
         class="hover:bg-gray-100"
         v-for="(empty, index) in empties"
         :key="index"
@@ -184,14 +185,14 @@ export default {
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
         ></td>
-      </tr>
+      </tr> -->
       <!-- <tr v-if="item.quote > 0">
         Date / Company / FIX / FRN / FIX / FRN / FIX / FRN
       </tr> -->
       <tr class="border-b border-gray-800"></tr>
     </tbody>
     <tfoot>
-      <tr class="border border-gray-800">
+      <tr class="border border-gray-800" v-if="items.length > 0">
         <td class="py-4"></td>
         <td class="text-left">Average by Spread</td>
         <td>21,000</td>
@@ -200,6 +201,11 @@ export default {
         <td>21,000</td>
         <td>21,000</td>
         <td>21,000</td>
+      </tr>
+      <tr v-else>
+        <td colspan="8" class="text-xl text-center italic">
+          No companies found
+        </td>
       </tr>
     </tfoot>
   </table>

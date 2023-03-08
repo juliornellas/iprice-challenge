@@ -4,7 +4,7 @@ import data from "@/data/data.json";
 export default createStore({
   state: {
     items: [],
-    empties: [],
+    // empties: [],
   },
   getters: {},
   mutations: {
@@ -39,8 +39,9 @@ export default createStore({
           });
         }
       });
-      state.items = [...data];
-      state.empties = [...empties];
+      state.items = [...data, ...empties];
+      // state.empties = [...empties];
+      console.log("Before", i);
       console.log("DATA", state);
     },
   },
