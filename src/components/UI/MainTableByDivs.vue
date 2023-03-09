@@ -1,13 +1,13 @@
 <script>
 import {
-  ChevronRightIcon,
+  // ChevronRightIcon,
   ChevronDoubleDownIcon,
   ChevronDoubleUpIcon,
 } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
 export default {
   components: {
-    ChevronRightIcon,
+    // ChevronRightIcon,
     ChevronDoubleDownIcon,
     ChevronDoubleUpIcon,
     // ChevronDownIcon,
@@ -130,55 +130,11 @@ export default {
       </tr>
     </thead>
     <tbody>
-      <tr class="hover:bg-gray-100" v-for="(item, index) in items" :key="index">
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          <div class="flex items-center">
-            <ChevronRightIcon
-              @click="expand()"
-              v-if="item.DateSent"
-              class="h-3 w-3 mr-2"
-            />
-            {{ $filters.formatDate(item.DateSent) }}
-          </div>
-        </td>
-        <td
-          class="text-left border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ item.Company }}
-        </td>
-        <td
-          class="bg-yellow-100 border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix5yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn5yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix10yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn10yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix40yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn40yrs) || "" }}
-        </td>
-      </tr>
+      <tr
+        class="hover:bg-gray-100"
+        v-for="(item, index) in items"
+        :key="index"
+      ></tr>
       <!-- Empties -->
       <tr
         class="hover:bg-gray-100"

@@ -63,11 +63,37 @@ export default {
             (filteredYears5.value && item.Years === 5) ||
             (filteredYears10.value && item.Years === 10) ||
             (filteredYears40.value && item.Years === 40)
-        )
-        .filter((item) => {
-          return item;
-        });
+        );
     });
+
+    // const filteredItems = computed(() => {
+    //   return items
+    //     .filter((item) =>
+    //       item.Company.toLowerCase().match(search.value.toLowerCase())
+    //     )
+    //     .filter((item) => item.Currency === filteredCurrency.value)
+    //     .filter(
+    //       (item) =>
+    //         (filteredYears5.value && item.Years === 5) ||
+    //         (filteredYears10.value && item.Years === 10) ||
+    //         (filteredYears40.value && item.Years === 40)
+    //     );
+    // });
+
+    const sortByDate = (event) => {
+      items.sort((a, b) => {
+        return event
+          ? new Date(a.DateSent) - new Date(b.DateSent)
+          : new Date(b.DateSent) - new Date(a.DateSent);
+      });
+    };
+
+    const sortByCompanyName = (event) => {
+      console.log("Chegou sort company name", event);
+      items.sort((a, b) => {
+        return event ? a.Company < b.Company && -1 : b.Company > a.Company && 1;
+      });
+    };
 
     return {
       filteredItems,
@@ -78,7 +104,7 @@ export default {
       search,
       title: "iPrice Challenge",
       items,
-      // empties: store.state.empties,
+      empties: store.state.empties,
       // filteredTypeSpread,
       // filteredTypeYield,
       // filteredType3MLSpread,
@@ -86,6 +112,8 @@ export default {
       selectedType,
       selectedCurrency,
       selectedYears,
+      sortByDate,
+      sortByCompanyName,
     };
   },
 };
@@ -172,7 +200,12 @@ export default {
     </div>
 
     <div>
-      <MainTable :items="filteredItems"></MainTable>
+      <MainTable
+        :items="filteredItems"
+        :empties="empties"
+        @sortByDate="sortByDate"
+        @sortByCompanyName="sortByCompanyName"
+      ></MainTable>
     </div>
   </div>
 </template>
