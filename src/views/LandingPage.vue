@@ -11,7 +11,10 @@ export default {
   setup() {
     const store = useStore();
     store.dispatch("readData");
-    const items = store.state.items;
+    const dataItems = store.getters.getItems;
+    const items = computed(() => JSON.parse(JSON.stringify(dataItems)));
+
+    console.log("STATE VUEX", store.state);
 
     //Filtering
     const search = ref("");
@@ -39,21 +42,24 @@ export default {
     }
 
     function selectedCurrency(curr) {
-      filteredCurrency.value = curr;
+      // filteredCurrency.value = curr;
+      store.dispatch("setFilterCurrency", curr);
     }
 
     function selectedYears(years) {
-      if (years === 5) {
-        filteredYears5.value = !filteredYears5.value;
-      } else if (years === 10) {
-        filteredYears10.value = !filteredYears10.value;
-      } else {
-        filteredYears40.value = !filteredYears40.value;
-      }
+      store.dispatch("setFilterYears", years);
+
+      // if (years === 5) {
+      //   filteredYears5.value = !filteredYears5.value;
+      // } else if (years === 10) {
+      //   filteredYears10.value = !filteredYears10.value;
+      // } else {
+      //   filteredYears40.value = !filteredYears40.value;
+      // }
     }
 
     const filteredItems = computed(() => {
-      return items
+      return items.value
         .filter((item) =>
           item.Company.toLowerCase().match(search.value.toLowerCase())
         )
@@ -81,7 +87,7 @@ export default {
     // });
 
     const sortByDate = (event) => {
-      items.sort((a, b) => {
+      items.value.sort((a, b) => {
         return event
           ? new Date(a.DateSent) - new Date(b.DateSent)
           : new Date(b.DateSent) - new Date(a.DateSent);
@@ -90,7 +96,7 @@ export default {
 
     const sortByCompanyName = (event) => {
       console.log("Chegou sort company name", event);
-      items.sort((a, b) => {
+      items.value.sort((a, b) => {
         return event ? a.Company < b.Company && -1 : b.Company > a.Company && 1;
       });
     };
@@ -201,7 +207,7 @@ export default {
 
     <div>
       <MainTable
-        :items="filteredItems"
+        :items="items"
         :empties="empties"
         @sortByDate="sortByDate"
         @sortByCompanyName="sortByCompanyName"

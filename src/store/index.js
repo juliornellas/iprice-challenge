@@ -7,8 +7,23 @@ export default createStore({
     empties: [],
     items2: [],
     empties2: [],
+    filters: {
+      currency: "USD",
+      type: "Spread",
+      years5: true,
+      years10: true,
+      years40: true,
+      search: "",
+    },
   },
-  getters: {},
+  getters: {
+    getItems(state) {
+      return state.items;
+    },
+    getCurrency(state) {
+      return state.filters.currency;
+    },
+  },
   mutations: {
     handleData(state, { Items: i }) {
       let data = [];
@@ -47,17 +62,15 @@ export default createStore({
       console.log("DATA", state);
     },
 
-    handleData2(state, { Items: i }) {
+    handleData2(state, { Items }) {
       let data = [];
       let empties = [];
-      i.forEach(({ Company, DateSent, Id, Preferred, Quote }) => {
+      Items.forEach(({ Company, DateSent, Id, Preferred, Quote }) => {
         if (Quote) {
           //Base variables for each ROW
           let baseSpread = {
             DateSent,
             Company,
-            Currency: "",
-            Years: "",
             Type: "Spread",
             Fix5yrs: [],
             Frn5yrs: [],
@@ -69,8 +82,6 @@ export default createStore({
           let baseYield = {
             DateSent,
             Company,
-            Currency: "",
-            Years: "",
             Type: "Yield",
             Fix5yrs: [],
             Frn5yrs: [],
@@ -82,8 +93,6 @@ export default createStore({
           let base3MLSpread = {
             DateSent,
             Company,
-            Currency: "",
-            Years: "",
             Type: "3MLSpread",
             Fix5yrs: [],
             Frn5yrs: [],
@@ -92,49 +101,225 @@ export default createStore({
             Fix40yrs: [],
             Frn40yrs: [],
           };
+
           //Loop inside a Quote
           Quote.forEach((item) => {
-            baseSpread.Years = item.Years;
-            base3MLSpread.Years = item.Years;
-            baseYield.Years = item.Years;
-            baseSpread.Currency = item.Currency;
-            base3MLSpread.Currency = item.Currency;
-            baseYield.Currency = item.Currency;
+            //inserir o filtro AQUI???
             if (item.Years === 5) {
               if (item.CouponType === "FIX") {
-                baseSpread.Fix5yrs.push(item.Spread);
-                baseYield.Fix5yrs.push(item.Yield);
-                base3MLSpread.Fix5yrs.push(item["3MLSpread"]);
+                // baseSpread.Fix5yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Fix5yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Fix5yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                baseSpread.Fix5yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Fix5yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Fix5yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Fix5yrs.push(item.Spread);
+                // baseYield.Fix5yrs.push(item.Yield);
+                // base3MLSpread.Fix5yrs.push(item["3MLSpread"]);
               } else {
-                baseSpread.Frn5yrs.push(item.Spread);
-                baseYield.Frn5yrs.push(item.Yield);
-                base3MLSpread.Frn5yrs.push(item["3MLSpread"]);
+                baseSpread.Frn5yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Frn5yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Frn5yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Frn5yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Frn5yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Frn5yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseSpread.Frn5yrs.push(item.Spread);
+                // baseYield.Frn5yrs.push(item.Yield);
+                // base3MLSpread.Frn5yrs.push(item["3MLSpread"]);
               }
             }
             if (item.Years === 10) {
               if (item.CouponType === "FIX") {
-                baseSpread.Fix10yrs.push(item.Spread);
-                baseYield.Fix10yrs.push(item.Yield);
-                base3MLSpread.Fix10yrs.push(item["3MLSpread"]);
+                baseSpread.Fix10yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Fix10yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Fix10yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Fix10yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Fix10yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Fix10yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseSpread.Fix10yrs.push(item.Spread);
+                // baseYield.Fix10yrs.push(item.Yield);
+                // base3MLSpread.Fix10yrs.push(item["3MLSpread"]);
               } else {
-                baseSpread.Frn10yrs.push(item.Spread);
-                baseYield.Frn10yrs.push(item.Yield);
-                base3MLSpread.Frn10yrs.push(item["3MLSpread"]);
+                baseSpread.Frn10yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Frn10yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Frn10yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Frn10yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Frn10yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Frn10yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseSpread.Frn10yrs.push(item.Spread);
+                // baseYield.Frn10yrs.push(item.Yield);
+                // base3MLSpread.Frn10yrs.push(item["3MLSpread"]);
               }
             }
             if (item.Years === 40) {
               if (item.CouponType === "FIX") {
-                baseSpread.Fix40yrs.push(item.Spread);
-                baseYield.Fix40yrs.push(item.Yield);
-                base3MLSpread.Fix40yrs.push(item["3MLSpread"]);
+                baseSpread.Fix40yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Fix40yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Fix40yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Fix40yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Fix40yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Fix40yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseSpread.Fix40yrs.push(item.Spread);
+                // baseYield.Fix40yrs.push(item.Yield);
+                // base3MLSpread.Fix40yrs.push(item["3MLSpread"]);
               } else {
-                baseSpread.Frn40yrs.push(item.Spread);
-                baseYield.Frn40yrs.push(item.Yield);
-                base3MLSpread.Frn40yrs.push(item["3MLSpread"]);
+                baseSpread.Frn40yrs.push({
+                  value: item.Spread,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                baseYield.Frn40yrs.push({
+                  value: item.Yield,
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                base3MLSpread.Frn40yrs.push({
+                  value: item["3MLSpread"],
+                  currency: item.Currency,
+                  years: item.Years,
+                });
+                // baseSpread.Frn40yrs = Object.assign({
+                //   value: item.Spread,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseYield.Frn40yrs = Object.assign({
+                //   value: item.Yield,
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // base3MLSpread.Frn40yrs = Object.assign({
+                //   value: item["3MLSpread"],
+                //   currency: item.Currency,
+                //   years: item.Years,
+                // });
+                // baseSpread.Frn40yrs.push(item.Spread);
+                // baseYield.Frn40yrs.push(item.Yield);
+                // base3MLSpread.Frn40yrs.push(item["3MLSpread"]);
               }
             }
           });
-          //Push each base variable to the main arra data
+          //Push each base variable to the main array data
           data.push(baseSpread);
           data.push(baseYield);
           data.push(base3MLSpread);
@@ -148,58 +333,41 @@ export default createStore({
           });
         }
       });
+
       state.items = [...data];
       state.empties = [...empties];
-      console.log("Before NEW FORMAT", i);
-      console.log("DATA - NEW FORMAT", state.items);
+      console.log("Before NEW FORMAT", Items);
+      // console.log("DATA - NEW FORMAT", state.items);
+    },
 
-      // let array = {
-      //   Openlane: {
-      //     Spread: {
-      //       Fix5yrs: [50],
-      //       Frn5yrs: [],
-      //       Fix10yrs: [50, 90],
-      //       Frn10yrs: [94],
-      //       Fix40yrs: [],
-      //       Frn40yrs: [128],
-      //     },
-      //     Yield: {
-      //       Fix5yrs: [0.873],
-      //       Frn5yrs: [],
-      //       Fix10yrs: [1.209, 1.828],
-      //       Frn10yrs: [1.826],
-      //       Fix40yrs: [],
-      //       Frn40yrs: [2.962],
-      //     },
-      //     "3MLSpread": {
-      //       Fix5yrs: [86],
-      //       Frn5yrs: [],
-      //       Fix10yrs: [13, 88],
-      //       Frn10yrs: [86],
-      //       Fix40yrs: [],
-      //       Frn40yrs: [150],
-      //     },
-      //   },
-      // };
-      // console.table("New array", array);
+    setFilterCurrency(state, payload) {
+      state.filters.currency = payload;
+      this.commit("handleData2", data);
+    },
 
-      // let array2 = {
-      //   DateSent: "2020-12-30",
-      //   Company: "Openlane",
-      //   Type: "Spread",
-      //   Fix5yrs: [86],
-      //   Frn5yrs: [],
-      //   Fix10yrs: [13, 88],
-      //   Frn10yrs: [86],
-      //   Fix40yrs: [],
-      //   Frn40yrs: [150],
-      // };
-      // console.table("New array 2", array2);
+    setFilterYears(state, payload) {
+      if (payload === 5) state.filters.years5 = payload;
+      if (payload === 10) state.filters.years10 = payload;
+      if (payload === 40) state.filters.years40 = payload;
+    },
+    setFilterSearch(state, payload) {
+      state.filters.search = payload;
     },
   },
   actions: {
     readData({ commit }) {
       commit("handleData2", data);
+    },
+    setFilterCurrency({ commit }, payload) {
+      console.log("setFilterCurrency", payload);
+      commit("setFilterCurrency", payload);
+    },
+    setFilterYears({ commit }, payload) {
+      console.log("setFilterYears", payload);
+      commit("setFilterYears", payload);
+    },
+    setFilterSearch({ commit }, payload) {
+      commit("setFilterSearch", payload);
     },
   },
   modules: {},

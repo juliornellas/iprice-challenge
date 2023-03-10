@@ -5,23 +5,26 @@ import {
   ChevronDoubleUpIcon,
 } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
+import TD from "@/components/UI/TD.vue";
 export default {
   components: {
     ChevronRightIcon,
     ChevronDoubleDownIcon,
     ChevronDoubleUpIcon,
     // ChevronDownIcon,
+    TD,
   },
-  props: {
-    items: {
-      type: Array,
-      required: true,
-    },
-    empties: {
-      type: Array,
-      required: false,
-    },
-  },
+  props: ["items", "empties"],
+  // props: {
+  //   items: {
+  //     type: Object,
+  //     required: true,
+  //   },
+  //   empties: {
+  //     type: Array,
+  //     required: false,
+  //   },
+  // },
   emits: ["sortByDate", "sortByCompanyName"],
   setup(props, { emit }) {
     let sortDate = ref(false);
@@ -148,36 +151,40 @@ export default {
         >
           {{ item.Company }}
         </td>
-        <td
-          class="bg-yellow-100 border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix5yrs) || "" }}
-        </td>
+        <TD :item="item" column="Fix5yrs" :id="index"></TD>
+        <!-- <td
+          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
+        > -->
+        <TD :item="item" column="Frn5yrs" :id="index"></TD>
+        <!-- {{ item.Frn5yrs[0]?.value || "" }} -->
+        <!-- </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn5yrs) || "" }}
-        </td>
+        > -->
+        <TD :item="item" column="Fix10yrs" :id="index"></TD>
+        <!-- {{ item.Fix10yrs[0]?.value || "" }} -->
+        <!-- </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix10yrs) || "" }}
-        </td>
+        > -->
+        <TD :item="item" column="Frn10yrs" :id="index"></TD>
+
+        <!-- {{ item.Frn10yrs[0]?.value || "" }} -->
+        <!-- </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn10yrs) || "" }}
-        </td>
+        > -->
+        <TD :item="item" column="Fix40yrs" :id="index"></TD>
+
+        <!-- {{ item.Fix40yrs[0]?.value || "" }} -->
+        <!-- </td>
         <td
           class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Fix40yrs) || "" }}
-        </td>
-        <td
-          class="border-b border-gray-300 dark:border-gray-700 p-2 dark:text-slate-400"
-        >
-          {{ Math.max(item.Frn40yrs) || "" }}
-        </td>
+        > -->
+        <TD :item="item" column="Frn40yrs" :id="index"></TD>
+
+        <!-- {{ item.Frn40yrs[0]?.value || "" }} -->
+        <!-- </td> -->
       </tr>
       <!-- Empties -->
       <tr
